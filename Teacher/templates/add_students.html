@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card card-custom p-4">
+            <h3 class="card-title text-primary mb-4"><i class="fa-solid fa-user-plus me-2"></i>Teacher Registration Form</h3>
+            <form action="{{ url_for('add_teacher') }}" method="POST">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold">Full Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="e.g. Dr. Sarah Jenkins" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" placeholder="sarah@university.edu" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" name="phone" class="form-control" placeholder="+1 555-0192" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Gender</label>
+                        <select name="gender" class="form-select" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Department</label>
+                        <select name="department" class="form-select" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="English Literature">English Literature</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Qualification</label>
+                        <input type="text" name="qualification" class="form-control" placeholder="Ph.D. / M.Tech" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Primary Subject</label>
+                        <input type="text" name="subject" class="form-control" placeholder="e.g. Data Structures" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Experience (Years)</label>
+                        <input type="number" name="experience" min="0" class="form-control" placeholder="5" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Date of Joining</label>
+                        <input type="date" name="date_of_joining" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Address</label>
+                        <textarea name="address" class="form-control" rows="3" placeholder="Enter full address..."></textarea>
+                    </div>
+                </div>
+                <div class="mt-4 text-end">
+                    <a href="{{ url_for('details') }}" class="btn btn-secondary me-2">Cancel</a>
+                    <button type="submit" class="btn btn-primary px-4"><i class="fa-solid fa-check me-1"></i> Save Teacher</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

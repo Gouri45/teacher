@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4"><i class="fa-solid fa-chart-pie me-2"></i>Analytics & Dashboard</h2>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card card-custom p-4 text-center bg-primary text-white">
+            <h6 class="text-uppercase fw-bold">Total Faculty Members</h6>
+            <h1 class="display-3 fw-bold my-2">{{ total_teachers }}</h1>
+            <p class="mb-0">Registered in Database</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card card-custom p-4">
+            <h5 class="card-title mb-3">Teachers by Department</h5>
+            <canvas id="deptChart"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card card-custom p-4">
+            <h5 class="card-title mb-3">Faculty Experience (Years)</h5>
+            <canvas id="expChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const deptLabels = {{ dept_labels | tojson }};
+    const deptCounts = {{ dept_counts | tojson }};
+
+    const expLabels = {{ exp_labels | tojson }};
+    const expYears = {{ exp_years | tojson }};
+
+    // Department Distribution (Pie Chart)
+    new Chart(document.getElementById('deptChart'), {
+        type: 'pie',
+        data: {
+            labels: deptLabels,
+            datasets: [{
+                data: deptCounts,
+                backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#0dcaf0', '#d63384']
+            }]
+        }
+    });
+
+    // Experience Chart (Bar Chart)
+    new Chart(document.getElementById('expChart'), {
+        type: 'bar',
+        data: {
+            labels: expLabels,
+            datasets: [{
+                label: 'Years of Experience',
+                data: expYears,
+                backgroundColor: '#0d6efd'
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+{% endblock %}
